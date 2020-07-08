@@ -1,2 +1,5 @@
 # Avoid Zip files to be uploaded
 *.zip
+
+# Avoid directory
+.DS_Store/
