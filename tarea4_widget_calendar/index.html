@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Memo's Calendar</title>
+  </head>
+
+  <script src="http://yui.yahooapis.com/3.17.2/build/yui/yui-min.js"></script>
+
+  <div style="width:700px; margin:0 auto;">
+    <body class="yui3-skin-sam yui3-g">
+      <!-- Add an additional blue button style -->
+      <style>
+        .yui3-button {
+          margin: 10px 0px 10px 0px;
+          color: #fff;
+          background-color: #3476b7;
+        }
+      </style>
+      <div id="demo" class="yui3-skin-sam yui3-g">
+        <!-- You need this skin class -->
+
+        <div id="leftcolumn" class="yui3-u">
+          <!-- Container for the calendar -->
+          <div id="mycalendar"></div>
+        </div>
+        <div id="rightcolumn" class="yui3-u">
+          <div id="links" style="padding-left: 20px;">
+            Selected date: <span id="selecteddate"></span>
+          </div>
+        </div>
+      </div>
+
+      <script type="text/javascript">
+        YUI().use("calendar", "datatype-date", "cssbutton", function (Y) {
+          // Create a new instance of calendar, placing it in
+          // #mycalendar container, setting its width to 340px,
+          // the flags for showing previous and next month's
+          // dates in available empty cells to true, and setting
+          // the date to today's date.
+          var calendar = new Y.Calendar({
+            contentBox: "#mycalendar",
+            width: "340px",
+            showPrevMonth: true,
+            showNextMonth: true,
+            date: new Date(),
+          }).render();
+
+          // Get a reference to Y.DataType.Date
+          var dtdate = Y.DataType.Date;
+
+          // Listen to calendar's selectionChange event.
+          calendar.on("selectionChange", function (ev) {
+            // Get the date from the list of selected
+            // dates returned with the event (since only
+            // single selection is enabled by default,
+            // we expect there to be only one date)
+            var newDate = ev.newSelection[0];
+
+            // Format the date and output it to a DOM
+            // element.
+            Y.one("#selecteddate").setHTML(dtdate.format(newDate));
+          });
+        });
+      </script>
+    </body>
+  </div>
+</html>
